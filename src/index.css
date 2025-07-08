@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Parastoo Font Class */
+.parastoo-hero {
+  font-family: "Parastoo", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+
+.taviraj-medium {
+  font-family: "Taviraj", serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.taviraj-extralight {
+  font-family: "Taviraj", serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.taviraj-regular {
+  font-family: "Taviraj", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.bebas-neue-regular {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+/* Pattaya Font Class */
+.pattaya-regular {
+  font-family: "Pattaya", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Enhanced Circular Scrollbar */
+::-webkit-scrollbar {
+    width: 12px; /* Increased width for better circular effect */
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #034525, #000000);
+    border-radius: 6px; /* Half of width for circular effect */
+    border: 2px solid transparent;
+    background-clip: content-box;
+    min-height: 30px;
+    transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #034525, #000000);;
+    transform: scale(1.1);
+}
+
+/* Firefox support */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #000000 rgba(0, 0, 0, 0.1);
+}
+
+/* Custom scrollable container */
+.custom-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: #000000 rgba(0, 0, 0, 0.1);
+}
+
+.custom-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+    background: #000000;
+    border-radius: 4px;
+    min-height: 20px;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+    background: #000000;
+}
