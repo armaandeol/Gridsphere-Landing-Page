@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { Points } from "../constants";
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import { VisionCard } from "../components/VisionCard";
 
 const Pointssection = () => {
   const sectionRef = useRef(null);
@@ -10,23 +11,21 @@ const Pointssection = () => {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    
-    gsap.set(boxRefs.current, { y: 100, opacity: 0 });
+    gsap.set(boxRefs.current, { opacity: 0 });
 
     ScrollTrigger.create({
       trigger: sectionRef.current,
       start: 'top 80%',
       onEnter: () => {
         gsap.to(boxRefs.current, {
-          y: 0,
           opacity: 1,
           duration: 0.7,
           stagger: 0.2,
-          ease: 'power3.out',
+          ease: 'power2.out',
         });
       },
       onLeaveBack: () => {
-        gsap.set(boxRefs.current, { y: 100, opacity: 0 });
+        gsap.set(boxRefs.current, { opacity: 0 });
       },
     });
 
@@ -41,21 +40,14 @@ const Pointssection = () => {
         {Points.map((item, idx) => (
           <div
             key={item.id}
-            ref={el => (boxRefs.current[idx] = el)}
-            className="point-box bg-white border border-gray-300 p-8 flex flex-col items-center text-center min-h-[300px] transition-all duration-700"
-            style={{ borderRadius: 0, boxShadow: 'none' }}
+            ref={(el) => (boxRefs.current[idx] = el)}
           >
-            <img 
-              src={item.iconUrl} 
-              alt={item.title} 
-              className="w-16 h-16 object-contain mb-6"
+            <VisionCard
+              title={item.title}
+              text={item.text}
+              bgImage={item.imageUrl}
+              hoverImage={item.backgroundurl}
             />
-            <h3 className="text-2xl font-bold mb-4 text-gray-800">
-              {item.title}
-            </h3>
-            <p className="flex-grow text-gray-700">
-              {item.text}
-            </p>
           </div>
         ))}
       </div>
