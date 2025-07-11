@@ -11,21 +11,25 @@ const Pointssection = () => {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    gsap.set(boxRefs.current, { opacity: 0 });
+    gsap.set(boxRefs.current, { y: 120, opacity: 0 });
 
     ScrollTrigger.create({
       trigger: sectionRef.current,
       start: 'top 80%',
       onEnter: () => {
         gsap.to(boxRefs.current, {
+          y: 0,
           opacity: 1,
-          duration: 0.7,
-          stagger: 0.2,
-          ease: 'power2.out',
+          duration: 1.2,
+          stagger: {
+            each: 0.6,
+            from: 0,
+          },
+          ease: "power3.out",
         });
       },
       onLeaveBack: () => {
-        gsap.set(boxRefs.current, { opacity: 0 });
+        gsap.set(boxRefs.current, { y: 120, opacity: 0 });
       },
     });
 
@@ -36,7 +40,7 @@ const Pointssection = () => {
 
   return (
     <div ref={sectionRef} className="py-20 px-4 md:px-8">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-7xl mx-auto px-4">
         {Points.map((item, idx) => (
           <div
             key={item.id}

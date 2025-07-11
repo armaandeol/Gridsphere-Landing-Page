@@ -3,7 +3,7 @@
 export function VisionCard({ title, text, bgImage, hoverImage }) {
 
     return (
-        <div className="max-w-xs w-full">
+        <div className="w-full">
             <div
                 className={`
           group w-full cursor-pointer overflow-hidden relative h-96 rounded-md shadow-xl
@@ -18,12 +18,12 @@ export function VisionCard({ title, text, bgImage, hoverImage }) {
                 />
 
                 {/* Optional dark overlay for smooth hover */}
-                <div className="absolute inset-0 bg-black/60 z-10 group-hover:bg-black/30 transition-all" />
+                <div className="absolute inset-0 bg-black/30 z-10 group-hover:bg-black/50 transition-all" />
 
                 {/* Text Content */}
-                <div className="relative z-20 text-white">
+                <div className="relative z-20 text-white mt-auto mb-6 px-4 text-left">
                     <h1 className="font-bold text-xl md:text-2xl">{title}</h1>
-                    <p className="text-base mt-2">{text}</p>
+                    <p className="text-base mt-2 opacity-70">{text}</p>
                 </div>
             </div>
         </div>
