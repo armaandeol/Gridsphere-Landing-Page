@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { Points } from "../constants";
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+import { VisionCard } from "../components/VisionCard";
 
 const Pointssection = () => {
   const sectionRef = useRef(null);
@@ -10,8 +11,7 @@ const Pointssection = () => {
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    
-    gsap.set(boxRefs.current, { y: 100, opacity: 0 });
+    gsap.set(boxRefs.current, { y: 120, opacity: 0 });
 
     ScrollTrigger.create({
       trigger: sectionRef.current,
@@ -20,13 +20,16 @@ const Pointssection = () => {
         gsap.to(boxRefs.current, {
           y: 0,
           opacity: 1,
-          duration: 0.7,
-          stagger: 0.2,
-          ease: 'power3.out',
+          duration: 1.2,
+          stagger: {
+            each: 0.6,
+            from: 0,
+          },
+          ease: "power3.out",
         });
       },
       onLeaveBack: () => {
-        gsap.set(boxRefs.current, { y: 100, opacity: 0 });
+        gsap.set(boxRefs.current, { y: 120, opacity: 0 });
       },
     });
 
@@ -37,25 +40,18 @@ const Pointssection = () => {
 
   return (
     <div ref={sectionRef} className="py-20 px-4 md:px-8">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-7xl mx-auto px-4">
         {Points.map((item, idx) => (
           <div
             key={item.id}
-            ref={el => (boxRefs.current[idx] = el)}
-            className="point-box bg-white border border-gray-300 p-8 flex flex-col items-center text-center min-h-[300px] transition-all duration-700"
-            style={{ borderRadius: 0, boxShadow: 'none' }}
+            ref={(el) => (boxRefs.current[idx] = el)}
           >
-            <img 
-              src={item.iconUrl} 
-              alt={item.title} 
-              className="w-16 h-16 object-contain mb-6"
+            <VisionCard
+              title={item.title}
+              text={item.text}
+              bgImage={item.imageUrl}
+              hoverImage={item.backgroundurl}
             />
-            <h3 className="text-2xl font-bold mb-4 text-gray-800">
-              {item.title}
-            </h3>
-            <p className="flex-grow text-gray-700">
-              {item.text}
-            </p>
           </div>
         ))}
       </div>
