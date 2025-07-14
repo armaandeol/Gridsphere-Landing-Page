@@ -3,6 +3,7 @@ import { Home } from './pages/Home'
 import { About } from './pages/About'
 import { Features } from './pages/Features'
 import { ScrollToTop } from './components/ScrollToTop'
+import Contact from './pages/Contact'
 
 export default function App() {
     return (
@@ -12,6 +13,7 @@ export default function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/features" element={<Features />} />
+                <Route path="/contact" element={<Contact />} />
             </Routes>
         </Router>
     )
