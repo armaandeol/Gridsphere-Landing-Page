@@ -1,60 +1,52 @@
-import { useEffect, useRef } from 'react';
-import { Points } from "../constants";
-import gsap from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
-import { VisionCard } from "../components/VisionCard";
+import CardSwap, { Card } from '../components/CardSwap';
+
+const Points = [
+  {
+    id: "0",
+    title: "Innovative Solutions",
+    text: "We strive to develop cutting-edge technologies that address real-world challenges, enhancing the quality of life for individuals and communities.",
+    imageUrl: "https://images.unsplash.com/photo-1732112622699-fd32f6e7b19e?q=80&w=1335&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    light: true,
+  },
+  {
+    id: "1",
+    title: "User-Centric Design",
+    text: "Our products are designed with the user in mind, ensuring that technology is accessible, intuitive, and enhances everyday experiences.",
+    imageUrl: "https://images.unsplash.com/photo-1496115965489-21be7e6e59a0?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    id: "2",
+    title: "Sustainability",
+    text: "We are committed to sustainable and responsible practices, ensuring that our innovations contribute positively to both the environment and society.",
+    imageUrl: "https://images.unsplash.com/photo-1527525443983-6e60c75fff46?q=80&w=1285&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    light: true,
+  },
+];
 
 const Pointssection = () => {
-  const sectionRef = useRef(null);
-  const boxRefs = useRef([]);
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    gsap.set(boxRefs.current, { y: 120, opacity: 0 });
-
-    ScrollTrigger.create({
-      trigger: sectionRef.current,
-      start: 'top 80%',
-      onEnter: () => {
-        gsap.to(boxRefs.current, {
-          y: 0,
-          opacity: 1,
-          duration: 1.2,
-          stagger: {
-            each: 0.6,
-            from: 0,
-          },
-          ease: "power3.out",
-        });
-      },
-      onLeaveBack: () => {
-        gsap.set(boxRefs.current, { y: 120, opacity: 0 });
-      },
-    });
-
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
-  }, []);
-
   return (
-    <div ref={sectionRef} className="py-20 px-4 md:px-8">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-7xl mx-auto px-4">
-        {Points.map((item, idx) => (
-          <div
-            key={item.id}
-            ref={(el) => (boxRefs.current[idx] = el)}
+    <div className="relative h-[600px] w-full">
+      <CardSwap
+        cardDistance={60}
+        verticalDistance={70}
+        delay={5000}
+        pauseOnHover={false}
+      >
+        {Points.map((point) => (
+          <Card
+            key={point.id}
+            style={{ 
+              backgroundImage: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(${point.imageUrl})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+            className="flex flex-col justify-center items-center text-center p-8"
           >
-            <VisionCard
-              title={item.title}
-              text={item.text}
-              bgImage={item.imageUrl}
-              hoverImage={item.backgroundurl}
-            />
-          </div>
+            <h3 className="text-2xl font-bold mb-4 text-white">{point.title}</h3>
+            <p className="text-lg text-white">{point.text}</p>
+          </Card>
         ))}
-      </div>
+      </CardSwap>
     </div>
   );
 };
