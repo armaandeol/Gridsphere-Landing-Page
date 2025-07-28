@@ -2,6 +2,8 @@ import { Header } from '../sections/Header';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
+import  TestimonialSection  from '../components/TestimonialSection';
+import { Footer } from '../sections/Footer';
 
 export const Solution = () => {
   const [ref, inView] = useInView({ threshold: 0.1 });
@@ -230,46 +232,7 @@ export const Solution = () => {
         </section>
 
         
-        <section className="py-20 text-white bg-green-600">
-          <div className="max-w-3xl px-4 mx-auto text-center">
-            <h2 className="mb-12 text-3xl font-bold">What Farmers Say</h2>
-            
-            <motion.div
-              whileHover={{
-                rotateY: 180,
-                transition: { duration: 0.6 }
-              }}
-              className="w-full perspective-1000"
-            >
-              <motion.div
-                whileHover={{ rotateY: 180 }}
-                className="relative flex items-center justify-center w-full h-64 p-8 bg-white bg-opacity-10 rounded-xl backdrop-blur-sm preserve-3d"
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <motion.div 
-                  className="absolute w-full backface-hidden"
-                  style={{ backfaceVisibility: "hidden" }}
-                >
-                  <blockquote className="mb-6 text-xl italic">
-                    
-                  </blockquote>
-                  <p className="font-medium"></p>
-                </motion.div>
-                <motion.div 
-                  className="absolute w-full backface-hidden rotate-y-180"
-                  style={{ 
-                    backfaceVisibility: "hidden",
-                    transform: "rotateY(180deg)"
-                  }}
-                >
-                  <p className="mb-4 text-lg">★★★★★</p>
-                  <p>Verified Customer</p>
-                  <p className="mt-2 text-sm">Since 2022</p>
-                </motion.div>
-              </motion.div>
-            </motion.div>
-          </div>
-        </section>
+        <TestimonialSection />
 
         
         <section className="px-4 py-20 text-white bg-gray-900">
@@ -301,6 +264,7 @@ export const Solution = () => {
           </div>
         </section>
       </div>
+      <Footer />
     </>
   );
 };
