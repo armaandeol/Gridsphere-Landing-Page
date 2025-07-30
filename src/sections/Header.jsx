@@ -1,14 +1,20 @@
 import { NavLink } from 'react-router-dom';
 import Menu from "../logos/menu";
+import logoImage from "../assets/sketch1727512163153(3).png"; // Adjust the path to your actual image
 
 export const Header = () => {
     return (
-        <header className="sticky top-0 z-10 backdrop-blur-sm">
+        <header className="sticky top-0 z-10 ">
             <div className="px-4 py-2">
                 <div className="Container">
                     <div className="flex items-center justify-between">
                         <NavLink to="/">
-                            <img src="https://i0.wp.com/www.carddsgn.com/wp-content/uploads/2021/06/2-August-Bioscience-logo.jpg?w=1080&ssl=1" alt="Logo" className="w-auto h-20 bg-transparent rounded-lg mix-blend-multiply" />
+                            {/* Replace with your imported image */}
+                            <img 
+                                src={logoImage} 
+                                alt="Logo" 
+                                className="w-auto h-12 rounded-lg " 
+                            />
                         </NavLink>
                         <Menu className="w-8 h-5 md:hidden" />
                         <nav className="items-center hidden gap-6 text-2xl md:flex text-black/60 parastoo-hero">
