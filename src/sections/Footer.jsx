@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import logo from '../assets/logo.png';
+import logo from '../assets/logo(5).png';
 import facebook from '../assets/facebook.svg';
 import twitter from '../assets/twitter.svg';
 import instagram from '../assets/instagram.svg';
@@ -10,7 +10,14 @@ export const Footer = () => {
         <footer className='bg-black text-[#BCBCBC] text-sm py-10 text-center'>
             <div className="container px-4 mx-auto">
                 <Link to="/">
-                    <img src={logo} className='relative inline-flex w-12 h-12 rounded' alt="logo" />
+              <div className="flex items-center justify-center w-full h-full">
+  <img 
+    src={logo} 
+    alt="Logo" 
+    className="h-12 rounded-lg invert brightness-0" 
+  />
+</div>
+  
                 </Link>
                 <nav className='flex flex-col gap-6 mt-6 md:flex-row md:justify-center'>
                     <Link to="/about" className="transition-colors hover:text-white">About</Link>
@@ -21,10 +28,11 @@ export const Footer = () => {
                     <a href="#" className="transition-colors hover:text-white">Careers</a>
                 </nav>
                 <div className='flex justify-center gap-6 mt-6'>
-                    <a href="#"><img src={facebook} alt="Facebook" className='w-6 h-6' /></a>
-                    <a href="#"><img src={twitter} alt="Twitter" className='w-6 h-6' /></a>
+                    <a href="https://www.facebook.com/profile.php?id=61577994149104"><img src={facebook} alt="Facebook" className='w-6 h-6' /></a>
+                    <a href="https://x.com/GridSphere444"><img src={twitter} alt="Twitter" className='w-6 h-6' /></a>
                     <a href="#"><img src={instagram} alt="Instagram" className='w-6 h-6' /></a>
-                    <a href="#"><img src={linkedin} alt="LinkedIn" className='w-6 h-6' /></a>
+                    <a href="https://www.linkedin.com/company/grid-sphere
+"><img src={linkedin} alt="LinkedIn" className='w-6 h-6' /></a>
                 </div>
                 <p className='mt-6'>&copy; 2025 Gridsphere, Inc. All rights reserved.</p>
             </div>

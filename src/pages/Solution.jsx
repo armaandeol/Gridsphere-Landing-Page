@@ -15,7 +15,6 @@ export const Solution = () => {
     }
   }, [controls, inView]);
 
- 
   const hoverEffects = {
     lift: {
       scale: 1.03,
@@ -35,12 +34,54 @@ export const Solution = () => {
     }
   };
 
+  // New animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100
+      }
+    }
+  };
+
+  const pulseAnimation = {
+    scale: [1, 1.05, 1],
+    transition: {
+      duration: 2,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  };
+
+  const floatingAnimation = {
+    y: [0, -15, 0],
+    transition: {
+      duration: 4,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  };
+
   return (
     <>
       <Header />
       
       <div className="bg-white">
-       
+        {/* Hero Section with enhanced animations */}
         <section className="max-w-6xl px-4 py-24 mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -49,23 +90,39 @@ export const Solution = () => {
             whileHover={hoverEffects.lift}
             className="inline-block"
           >
-            <h1 className="mb-6 text-5xl font-bold text-gray-900 ">
-             
+            <motion.h1
+              className="mb-6 text-5xl font-bold text-gray-900"
+              animate={pulseAnimation}
+            >
               Smart Farming Solutions
-            </h1>
+            </motion.h1>
           </motion.div>
-         <motion.p 
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  transition={{ delay: 0.4 }}
-  whileHover={hoverEffects.rotate}
-  className="inline-block max-w-3xl mx-auto text-2xl font-medium text-black"
->
-  Transforming agriculture with real-time sensing and AI
-</motion.p>
           
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            whileHover={hoverEffects.rotate}
+            className="inline-block max-w-3xl mx-auto text-2xl font-medium text-black"
+          >
+            Transforming agriculture with real-time sensing and AI
+          </motion.p>
+          
+          {/* Animated decorative elements */}
+          <motion.div 
+            className="absolute top-0 left-0 w-20 h-20 bg-green-100 rounded-full opacity-20"
+            animate={floatingAnimation}
+            style={{ x: '10%', y: '20%' }}
+          />
+          <motion.div 
+            className="absolute top-0 right-0 w-32 h-32 bg-blue-100 rounded-full opacity-20"
+            animate={floatingAnimation}
+            style={{ x: '-10%', y: '30%' }}
+            transition={{ duration: 5, delay: 0.5 }}
+          />
         </section>
         
+        {/* Problem Section with staggered animations */}
         <section className="max-w-4xl px-4 py-16 mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -74,8 +131,23 @@ export const Solution = () => {
             whileHover={hoverEffects.glow}
             className="p-8 bg-white border border-gray-100 shadow-lg rounded-xl"
           >
-            <h2 className="mb-6 text-3xl font-bold text-gray-800">The Problem We Saw</h2>
-            <ul className="mb-8 space-y-4">
+            <motion.h2 
+              className="mb-6 text-3xl font-bold text-gray-800"
+              whileInView={{
+                scale: [1, 1.05, 1],
+                transition: { duration: 0.5 }
+              }}
+            >
+              The Problem We Saw
+            </motion.h2>
+            
+            <motion.ul 
+              className="mb-8 space-y-4"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
               {[
                 "Overuse or underuse of fertilizers and water",
                 "Lack of real-time information",
@@ -84,6 +156,7 @@ export const Solution = () => {
               ].map((item, index) => (
                 <motion.li
                   key={index}
+                  variants={itemVariants}
                   whileHover={{ 
                     x: 10,
                     borderLeft: "4px solid #10b981",
@@ -92,32 +165,57 @@ export const Solution = () => {
                   }}
                   className="flex items-start py-2 text-lg text-gray-700 border-l-4 border-transparent"
                 >
-                  <span className="mr-3 text-xl text-red-500">•</span>
+                  <motion.span 
+                    className="mr-3 text-xl text-red-500"
+                    animate={{
+                      rotate: [0, 10, -10, 0],
+                      transition: { duration: 0.5 }
+                    }}
+                    whileHover={{
+                      scale: 1.5,
+                      transition: { duration: 0.2 }
+                    }}
+                  >
+                    •
+                  </motion.span>
                   {item}
                 </motion.li>
               ))}
-            </ul>
+            </motion.ul>
           </motion.div>
         </section>
 
-       
+        {/* Solutions Section with enhanced animations */}
         <section className="py-16 bg-green-50">
           <div className="max-w-6xl px-4 mx-auto">
-            <motion.h2
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+            <motion.div
+              initial={{ scale: 0.9 }}
+              whileInView={{ scale: 1 }}
               viewport={{ once: true }}
-              whileHover={{
-                scale: 1.02,
-                background: "linear-gradient(90deg, #f0fdf4, #ecfdf5)",
-                transition: { duration: 0.3 }
-              }}
-              className="inline-block p-4 mb-12 text-3xl font-bold text-center text-gray-800 rounded-lg"
+              transition={{ type: "spring" }}
             >
-              Our Solutions
-            </motion.h2>
+              <motion.h2
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                whileHover={{
+                  scale: 1.02,
+                  background: "linear-gradient(90deg, #f0fdf4, #ecfdf5)",
+                  transition: { duration: 0.3 }
+                }}
+                className="inline-block p-4 mb-12 text-3xl font-bold text-center text-gray-800 rounded-lg"
+              >
+                Our Solutions
+              </motion.h2>
+            </motion.div>
             
-            <div className="grid gap-8 md:grid-cols-2">
+            <motion.div 
+              className="grid gap-8 md:grid-cols-2"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
               {[
                 {
                   title: "Smart Monitoring",
@@ -142,9 +240,7 @@ export const Solution = () => {
               ].map((item, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  variants={itemVariants}
                   whileHover={{
                     y: -10,
                     rotate: "1deg",
@@ -156,23 +252,49 @@ export const Solution = () => {
                 >
                   <motion.div 
                     whileHover={{ scale: 1.2 }}
+                    whileTap={{ scale: 0.9 }}
                     className="flex items-center justify-center w-16 h-16 mb-4 text-4xl bg-green-100 rounded-full"
                   >
                     {item.icon}
                   </motion.div>
-                  <h3 className="mb-3 text-2xl font-bold text-gray-800">{item.title}</h3>
-                  <p className="text-gray-700">{item.desc}</p>
+                  <motion.h3 
+                    className="mb-3 text-2xl font-bold text-gray-800"
+                    whileHover={{ color: "#10b981" }}
+                  >
+                    {item.title}
+                  </motion.h3>
+                  <motion.p 
+                    className="text-gray-700"
+                    whileHover={{ x: 5 }}
+                  >
+                    {item.desc}
+                  </motion.p>
                 </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </section>
 
-       
+      
         <section className="max-w-6xl px-4 py-16 mx-auto">
-          <h2 className="mb-12 text-3xl font-bold text-center text-gray-800">Why Choose Us?</h2>
+          <motion.h2 
+            className="mb-12 text-3xl font-bold text-center text-gray-800"
+            whileInView={{
+              textShadow: "0 0 8px rgba(16, 185, 129, 0.5)",
+              transition: { duration: 0.5, repeat: 1, repeatType: "reverse" }
+            }}
+            viewport={{ once: true }}
+          >
+            Why Choose Us?
+          </motion.h2>
           
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          <motion.div 
+            className="grid grid-cols-1 gap-6 md:grid-cols-3"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
             {[
               {
                 title: "Designed for India",
@@ -207,9 +329,7 @@ export const Solution = () => {
             ].map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
+                variants={itemVariants}
                 whileHover={{
                   scale: 1.05,
                   background: `linear-gradient(to bottom right, var(--tw-gradient-stops))`,
@@ -220,24 +340,48 @@ export const Solution = () => {
               >
                 <motion.div 
                   whileHover={{ rotate: 360 }}
+                  whileTap={{ scale: 0.9 }}
                   className="flex items-center justify-center w-10 h-10 mb-4 bg-white rounded-full shadow-inner"
                 >
-                  <span className="text-lg">{index + 1}</span>
+                  <motion.span 
+                    className="text-lg"
+                    whileHover={{ scale: 1.5 }}
+                  >
+                    {index + 1}
+                  </motion.span>
                 </motion.div>
-                <h3 className="mb-2 text-xl font-bold text-gray-800">{item.title}</h3>
-                <p className="text-gray-700">{item.desc}</p>
+                <motion.h3 
+                  className="mb-2 text-xl font-bold text-gray-800"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  {item.title}
+                </motion.h3>
+                <motion.p 
+                  className="text-gray-700"
+                  whileHover={{ x: 5 }}
+                >
+                  {item.desc}
+                </motion.p>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </section>
 
         
         <TestimonialSection />
 
-        
+       
         <section className="px-4 py-20 text-white bg-gray-900">
           <div className="max-w-2xl mx-auto text-center">
-            <h2 className="mb-6 text-3xl font-bold md:text-4xl">Ready to Upgrade Your Farm?</h2>
+            <motion.h2 
+              className="mb-6 text-3xl font-bold md:text-4xl"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+            >
+              Ready to Upgrade Your Farm?
+            </motion.h2>
             
             <motion.div
               whileHover={{
@@ -246,11 +390,16 @@ export const Solution = () => {
               }}
               whileTap={{ scale: 0.95 }}
               className="inline-block"
+              animate={pulseAnimation}
             >
               <motion.button
                 whileHover={{
                   background: "linear-gradient(45deg, #10b981, #3b82f6)",
                   boxShadow: "0 0 20px rgba(74, 222, 128, 0.7)"
+                }}
+                whileTap={{ 
+                  scale: 0.95,
+                  boxShadow: "0 0 10px rgba(74, 222, 128, 0.5)"
                 }}
                 className="relative px-10 py-4 overflow-hidden text-lg font-bold text-white bg-green-600 rounded-full shadow-lg"
               >
@@ -259,8 +408,37 @@ export const Solution = () => {
                   className="absolute inset-0 opacity-0 bg-gradient-to-r from-green-500 to-blue-500"
                   whileHover={{ opacity: 1 }}
                 />
+               
+                <motion.span
+                  className="absolute top-0 left-0 w-full h-full bg-white rounded-full opacity-0"
+                  whileTap={{
+                    scale: 2,
+                    opacity: 0.2,
+                    transition: { duration: 0.5 }
+                  }}
+                />
               </motion.button>
             </motion.div>
+            
+            
+            <motion.div 
+              className="absolute bottom-0 left-0 w-40 h-40 bg-green-400 rounded-full opacity-10"
+              animate={{
+                ...floatingAnimation,
+                x: [0, 50, 0],
+                transition: { duration: 6 }
+              }}
+              style={{ y: '-20%' }}
+            />
+            <motion.div 
+              className="absolute bottom-0 right-0 w-24 h-24 bg-blue-400 rounded-full opacity-10"
+              animate={{
+                ...floatingAnimation,
+                x: [0, -30, 0],
+                transition: { duration: 5, delay: 0.5 }
+              }}
+              style={{ y: '-10%' }}
+            />
           </div>
         </section>
       </div>
