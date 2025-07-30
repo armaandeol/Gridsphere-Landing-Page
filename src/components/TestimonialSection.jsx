@@ -1,6 +1,5 @@
 "use client";
 import { motion } from "framer-motion";
-import { Star } from "lucide-react";
 
 const testimonials = [
   {
@@ -35,16 +34,6 @@ const testimonials = [
 
 const TestimonialCard = ({ testimonial }) => (
   <div className="w-full max-w-sm bg-white shadow-xl rounded-2xl p-6 mx-auto transition-all duration-500 ease-in-out group hover:scale-105">
-    <div className="flex items-center justify-between mb-2">
-      <div className="flex gap-1 text-yellow-400">
-        {Array(5)
-          .fill(0)
-          .map((_, i) => (
-            <Star key={i} className="h-4 w-4 fill-yellow-400" />
-          ))}
-      </div>
-      <span className="text-gray-400 text-xl font-bold">”</span>
-    </div>
     <p className="text-sm text-gray-700 mb-4 transition-all duration-500 group-hover:blur-none blur-[2px] opacity-80 group-hover:opacity-100">
       "{testimonial.review}"
     </p>
