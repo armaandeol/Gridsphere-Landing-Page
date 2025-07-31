@@ -2,6 +2,7 @@ import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import fieldsVideo from '../assets/fields.webm';
+import { Link } from 'react-router-dom';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -28,7 +29,7 @@ export const Hero = () => {
 
       // Initial state - everything hidden
       gsap.set([headingRef.current, subheadingRef.current, buttonsRef.current], {
-        opacity: 0,
+        opacity: -10,
         y: 100
       });
 
@@ -94,7 +95,7 @@ export const Hero = () => {
                          font-bold text-white drop-shadow-2xl mb-3 lg:mb-10 xl:mb-12
                          leading-tight"
             >
-              Agriculture hasn't changed much in centuries — We're not just changing it, we're upgrading it.
+              Empowering Farmers with Smart Technology
             </h1>
 
             {/* Subheading */}
@@ -104,7 +105,7 @@ export const Hero = () => {
                          text-white/90 drop-shadow-lg mb-10 lg:mb-16
                          font-medium leading-relaxed max-w-4xl"
             >
-              Empowering farmers and agri-institutions with smart, affordable, and AI-driven solutions for sustainable farming
+              At Grid Sphere, we're transforming agriculture by integrating cutting-edge IoT and data-driven tools. From soil to cloud, we make farming smarter, more sustainable, and more profitable.
             </p>
 
             {/* Call to Action Buttons */}
@@ -112,23 +113,27 @@ export const Hero = () => {
               ref={buttonsRef}
               className="flex flex-col sm:flex-row gap-6"
             >
-              <button className="bg-green-600 hover:bg-green-700 text-white font-bold 
+              <Link 
+                to="/products"
+                className="bg-green-600 hover:bg-green-700 text-white font-bold 
                                py-4 px-10 md:py-5 md:px-12 
                                rounded-full text-xl md:text-2xl
                                transition-all duration-300 transform hover:scale-105
                                shadow-lg hover:shadow-xl backdrop-blur-sm
-                               border border-green-500/30">
+                               border border-green-500/30 inline-block text-center w-full sm:w-auto">
                 Explore Solutions
-              </button>
+              </Link>
               
-              <button className="bg-transparent hover:bg-white/10 text-white font-bold 
+              <Link 
+                to="/contact"
+                className="bg-transparent hover:bg-white/10 text-white font-bold 
                                py-4 px-10 md:py-5 md:px-12 
                                rounded-full text-xl md:text-2xl
                                transition-all duration-300 transform hover:scale-105
                                border-2 border-white/70 hover:border-white
-                               shadow-lg hover:shadow-xl backdrop-blur-sm">
-                Request a Demo
-              </button>
+                               shadow-lg hover:shadow-xl backdrop-blur-sm text-center w-full sm:w-auto">
+                Let's Talk
+              </Link>
             </div>
 
           </div>

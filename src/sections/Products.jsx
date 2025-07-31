@@ -123,7 +123,7 @@ const ProductsSection = () => {
         "Solar-powered operation",
         "Cloud-based dashboard"
       ],
-      image: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?q=80&w=3556&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      image: "/src/assets/images/soil_health_monitor.jpg",
       detailText: "Our Smart Farm Monitoring Station represents the cutting edge in agricultural technology. Designed specifically for Indian farming conditions, this durable, weather-resistant unit can be installed anywhere on your farm. The station creates a continuous stream of environmental data, giving you unprecedented insight into your field's microclimate and soil conditions. By analyzing this data, you can optimize irrigation schedules, anticipate pest and disease risks, and fine-tune your planting and harvesting decisions."
     },
     {
@@ -139,7 +139,7 @@ const ProductsSection = () => {
         "Easy-to-use handheld device",
         "Data export for analysis"
       ],
-      image: "https://images.unsplash.com/photo-1602081957921-9137a5d6eaee?q=80&w=2793&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      image: "/src/assets/images/soil_health_monitor.jpg",
       detailText: "The Portable Soil Health Monitor transforms how soil testing is done in India. Instead of waiting days or weeks for lab results, farmers and researchers can get immediate soil analysis right in the field. Our proprietary AI algorithms analyze sensor data to provide accurate NPK recommendations, helping reduce fertilizer waste while ensuring optimal crop nutrition. The unit's compact design allows it to be carried by hand or mounted on drones for rapid field surveys, making it perfect for both smallholder farmers and large agricultural operations."
     },
     {
@@ -155,7 +155,7 @@ const ProductsSection = () => {
         "Water efficiency optimization",
         "Smart alerts & thresholds"
       ],
-      image: "https://images.unsplash.com/photo-1599202860130-f600f4948364?q=80&w=2515&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      image: "/src/assets/images/irrigation_system.jpg",
       detailText: "Water conservation is critical for sustainable farming, especially in regions facing drought or irregular rainfall. Our Smart Irrigation System combines sensor data with weather forecasts to make intelligent watering decisions. The system can be programmed to maintain optimal soil moisture levels automatically or controlled manually through our intuitive mobile app. By delivering precisely the right amount of water exactly when needed, farmers can reduce water usage by up to 40% while improving crop yields. The system is designed for easy installation with existing irrigation infrastructure."
     }
   ];
