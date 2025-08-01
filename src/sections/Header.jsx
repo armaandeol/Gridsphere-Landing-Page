@@ -4,7 +4,7 @@ import logoImage from "../assets/sketch1727512163153(3).png"; // Adjust the path
 
 export const Header = () => {
     return (
-        <header className="sticky top-0 z-10 ">
+        <header className="sticky top-0 z-50 ">
             <div className="px-4 py-2">
                 <div className="Container">
                     <div className="flex items-center justify-between">
@@ -35,22 +35,21 @@ export const Header = () => {
                                 About Us
                             </NavLink>
                             <NavLink 
-                                to="/features" 
+                                to="/products" 
                                 className={({ isActive }) => 
                                     `transition-colors hover:text-black ${isActive ? "text-black font-bold" : ""}`
                                 }
                             >
-                                Features
+                                Products
                             </NavLink>
                             <NavLink 
-                                to="/a" 
+                                to="/solutions" 
                                 className={({ isActive }) => 
                                     `transition-colors hover:text-black ${isActive ? "text-black font-bold" : ""}`
                                 }
                             >
                                 Solution
                             </NavLink>
-                            <a href="#" className="transition-colors hover:text-black">Help</a>
                             <NavLink 
                                 to="/contact" 
                                 className={({ isActive }) => 

@@ -69,7 +69,7 @@ export const Vision = () => {
               variants={textItem}
               className="w-full lg:w-1/2 lg:pr-4"
             >
-              <h1 className="text-3xl lg:text-4xl leading-relaxed">
+              <h1 className="text-3xl lg:text-4xl leading-relaxed pt-4 lg:pt-0">
                 We aim to revolutionize the way people interact with technology, creating a seamless blend
                 of <span className="font-semibold text-black">innovation</span> and <span className="font-semibold text-black">
                 user experience</span> that empowers individuals and communities.
@@ -79,7 +79,7 @@ export const Vision = () => {
             {/* Graphic Column */}
             <motion.div 
               variants={graphicItem}
-              className="w-full lg:w-1/2 lg:pl-4 px-12"
+              className="w-full flex justify-start items-center lg:justify-center lg:w-1/2 lg:pl-4 lg:px-12 px-0"
             >
               <Pointssection />
             </motion.div>

@@ -1,359 +1,665 @@
 "use client";
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { LayoutGrid } from '../components/ui/layout-grid';
-import soilHealth from '../assets/soil_health.jpg';
-import climate from '../assets/climate.jpg';
-import drip from '../assets/drip_line.jpg';
-import student from '../assets/student.jpg';
-import { AppleCardsCarouselDemo } from './Cards';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-export { LayoutGrid as UseCases };
+gsap.registerPlugin(ScrollTrigger);
 
-const ProductCard = ({ product, isExpanded, onClick }) => {
+const Products = () => {
   return (
-    <motion.div
-      layout
-      className={`cursor-pointer rounded-xl shadow-lg overflow-hidden ${
-        isExpanded ? 'bg-gradient-to-br from-green-50 to-blue-50' : 'bg-white'
-      }`}
-      onClick={onClick}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      whileHover={{ scale: 1.03 }}
-    >
-      <motion.div layout className="p-6 flex items-start">
-        <div className="bg-green-100 p-3 rounded-lg mr-4">
-          <span className="text-2xl">{product.icon}</span>
-        </div>
-        <div>
-          <motion.h3 
-            layout="position"
-            className="text-xl font-bold text-gray-800"
-          >
-            {product.title}
-          </motion.h3>
-          <motion.p 
-            layout="position"
-            className="text-gray-600 mt-2"
-          >
-            {product.shortDesc}
-          </motion.p>
-        </div>
-      </motion.div>
+    <div className="bg-white min-h-screen">
+      <HeroSection />
+      <ProductsSection />
+      <BenefitsSection />
+      <UseCasesSection />
+    </div>
+  );
+};
 
-      <AnimatePresence>
-        {isExpanded && (
-          <motion.div
-            layout
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.4 }}
-            className="px-6 pb-6"
-          >
-            <div className="border-t border-gray-200 my-4 pt-4">
-              <p className="text-gray-700 mb-4">{product.longDesc}</p>
-              <div className="flex flex-col md:flex-row gap-6">
-                <div className="flex-1">
-                  <h4 className="font-semibold text-gray-800 mb-2">Key Features:</h4>
-                  <ul className="list-disc pl-5 space-y-1 text-gray-700">
-                    {product.features.map((feature, idx) => (
-                      <li key={idx}>{feature}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="flex-1">
-                  <div className="bg-gray-200 border-2 border-dashed rounded-xl w-full h-48" />
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
+const HeroSection = () => {
+  const containerRef = useRef(null);
+  
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Animate the highlight text effect similar to Story.jsx
+      const highlights = gsap.utils.toArray('.highlight-text');
+      highlights.forEach(highlight => {
+        gsap.fromTo(highlight,
+          { backgroundSize: "0% 100%" },
+          {
+            backgroundSize: "100% 100%",
+            duration: 1,
+            scrollTrigger: {
+              trigger: highlight,
+              start: "top 85%",
+              toggleActions: "play none none reverse"
+            }
+          }
+        );
+      });
+    }, containerRef);
+    
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <motion.section 
+      ref={containerRef}
+      className="max-w-6xl mx-auto px-4 py-16 md:py-24 text-center"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+    >
+      <motion.div
+        initial={{ scale: 0.9 }}
+        animate={{ scale: 1 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+        className="inline-block mb-6"
+      >
+        <motion.h1 
+        className="text-4xl md:text-6xl font-bold text-black mb-10"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3, duration: 0.5 }}
+      >
+        Smart Farm Solutions
+      </motion.h1>
+      </motion.div>
+      
+      
+      
+      <motion.p 
+        className="text-xl text-gray-600 max-w-3xl mx-auto"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.6, duration: 1 }}
+      >
+        At Grid Sphere, we develop <span className="highlight-text bg-gradient-to-r from-green-200 to-blue-200 bg-no-repeat bg-left-bottom bg-[length:0%_100%] transition-all duration-1000">intelligent systems</span> that help farmers and agricultural institutions monitor, analyze, and act — all in real-time. Our products are built for <span className="highlight-text bg-gradient-to-r from-yellow-200 to-green-200 bg-no-repeat bg-left-bottom bg-[length:0%_100%] transition-all duration-1000">Indian conditions</span> and backed by cutting-edge tech.
+      </motion.p>
+    </motion.section>
   );
 };
 
 const ProductsSection = () => {
-  const [expandedIndex, setExpandedIndex] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Add parallax effect to product images similar to Story.jsx
+      const images = gsap.utils.toArray('.product-image');
+      images.forEach(image => {
+        gsap.to(image, {
+          y: -30,
+          scale: 1.05,
+          scrollTrigger: {
+            trigger: image,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1
+          }
+        });
+      });
+    }, sectionRef);
+    
+    return () => ctx.revert();
+  }, []);
 
   const products = [
     {
-      title: "Smart Irrigation Controller",
+      title: "Smart Farm Monitoring Station",
+      icon: "🌾",
+      shortDesc: "Your field, under constant watch",
+      longDesc: "A fixed, solar-powered IoT device that continuously tracks environmental conditions — helping you make informed, timely decisions.",
+      features: [
+        "Monitors air & soil temperature",
+        "Tracks humidity (air, surface & depth)",
+        "Measures rainfall and wind speed/direction",
+        "Light intensity and solar radiation",
+        "Air quality (CO₂, NH₃, smoke)",
+        "Wireless data logging",
+        "Solar-powered operation",
+        "Cloud-based dashboard"
+      ],
+      image: "/src/assets/images/soil_health_monitor.jpg",
+      detailText: "Our Smart Farm Monitoring Station represents the cutting edge in agricultural technology. Designed specifically for Indian farming conditions, this durable, weather-resistant unit can be installed anywhere on your farm. The station creates a continuous stream of environmental data, giving you unprecedented insight into your field's microclimate and soil conditions. By analyzing this data, you can optimize irrigation schedules, anticipate pest and disease risks, and fine-tune your planting and harvesting decisions."
+    },
+    {
+      title: "Portable Soil Health Monitor",
+      icon: "🧪",
+      shortDesc: "Test soil anywhere, instantly",
+      longDesc: "A compact, AI-powered device that predicts NPK (Nitrogen, Phosphorus, Potassium) and moisture levels, using dielectric and NIR-based sensing.",
+      features: [
+        "AI-based prediction engine",
+        "Real-time on-spot testing",
+        "Drone-compatible design",
+        "Smart data-driven fertilization planning",
+        "Easy-to-use handheld device",
+        "Data export for analysis"
+      ],
+      image: "/src/assets/images/soil_health_monitor.jpg",
+      detailText: "The Portable Soil Health Monitor transforms how soil testing is done in India. Instead of waiting days or weeks for lab results, farmers and researchers can get immediate soil analysis right in the field. Our proprietary AI algorithms analyze sensor data to provide accurate NPK recommendations, helping reduce fertilizer waste while ensuring optimal crop nutrition. The unit's compact design allows it to be carried by hand or mounted on drones for rapid field surveys, making it perfect for both smallholder farmers and large agricultural operations."
+    },
+    {
+      title: "Smart Irrigation System",
       icon: "💧",
-      shortDesc: "Automated water management system",
-      longDesc: "Our flagship product optimizes water usage by integrating real-time weather data, soil moisture sensors, and crop-specific requirements. It reduces water consumption by up to 40% while maintaining optimal crop health.",
+      shortDesc: "Automate water. Save time. Save resources",
+      longDesc: "Our intelligent irrigation control system activates pumps and valves based on live soil data, weather conditions, or user-defined schedules.",
       features: [
-        "Real-time soil moisture monitoring",
-        "Weather prediction integration",
-        "Mobile app control",
-        "Water usage analytics",
-        "Multi-zone management"
-      ]
-    },
-    {
-      title: "Crop Health Monitor",
-      icon: "🌱",
-      shortDesc: "AI-powered plant disease detection",
-      longDesc: "Using hyperspectral imaging and machine learning, this system detects plant diseases and nutrient deficiencies weeks before visible symptoms appear. Early intervention increases yield by 15-25%.",
-      features: [
-        "Early disease detection",
-        "Nutrient deficiency analysis",
-        "Growth stage tracking",
-        "Yield prediction",
-        "Mobile alerts"
-      ]
-    },
-    {
-      title: "Farm Automation Hub",
-      icon: "🤖",
-      shortDesc: "Centralized farm management system",
-      longDesc: "The central nervous system of your smart farm. Integrates all sensors and equipment into a single dashboard with automated workflows and predictive analytics.",
-      features: [
-        "Equipment integration",
-        "Automated task scheduling",
-        "Predictive maintenance",
-        "Energy optimization",
-        "Customizable dashboards"
-      ]
+        "Auto-start/stop via soil moisture sensing",
+        "Weather-integrated decision support",
+        "Mobile + dashboard remote control",
+        "Plug & play automation",
+        "Water efficiency optimization",
+        "Smart alerts & thresholds"
+      ],
+      image: "/src/assets/images/irrigation_system.jpg",
+      detailText: "Water conservation is critical for sustainable farming, especially in regions facing drought or irregular rainfall. Our Smart Irrigation System combines sensor data with weather forecasts to make intelligent watering decisions. The system can be programmed to maintain optimal soil moisture levels automatically or controlled manually through our intuitive mobile app. By delivering precisely the right amount of water exactly when needed, farmers can reduce water usage by up to 40% while improving crop yields. The system is designed for easy installation with existing irrigation infrastructure."
     }
   ];
 
-  const handleCardClick = (index) => {
-    setExpandedIndex(expandedIndex === index ? null : index);
+  const openProductDetail = (product) => {
+    setSelectedProduct(product);
+    // Prevent scrolling when overlay is open
+    document.body.style.overflow = 'hidden';
   };
+  
+  const closeProductDetail = () => {
+    setSelectedProduct(null);
+    // Re-enable scrolling
+    document.body.style.overflow = 'auto';
+  };
+  
+  // Clean up effect to ensure scrolling is re-enabled if component unmounts while overlay is open
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, []);
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-16">
-      <motion.div 
-        className="text-center mb-16"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <motion.h1 
-          className="text-4xl md:text-5xl font-bold mb-4"
-        >
-          Our Products
-        </motion.h1>
-        <motion.p 
-          className="text-xl text-gray-600 max-w-2xl mx-auto"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.8 }}
-        >
-          Innovative solutions designed to transform traditional farming into precision agriculture
-        </motion.p>
-      </motion.div>
-
-      <motion.div 
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+    <section ref={sectionRef} className="max-w-6xl mx-auto px-4 py-12 md:py-20">
+      <motion.div
+        className="grid grid-cols-1 lg:grid-cols-3 gap-8"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.4, duration: 0.8 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8 }}
       >
         {products.map((product, index) => (
           <ProductCard
             key={index}
             product={product}
-            isExpanded={expandedIndex === index}
-            onClick={() => handleCardClick(index)}
+            index={index}
+            onClick={() => openProductDetail(product)}
           />
         ))}
       </motion.div>
-    </div>
+      
+      <AnimatePresence mode="wait">
+        {selectedProduct && (
+          <ProductOverlay 
+            product={selectedProduct} 
+            onClose={closeProductDetail} 
+          />
+        )}
+      </AnimatePresence>
+    </section>
   );
 };
 
-const AnimatedHeading = () => {
+const ProductCard = ({ product, index, onClick }) => {
+  const cardRef = useRef(null);
+  const isInView = useInView(cardRef, { once: true, margin: "-100px" });
+  
+  // Staggered animation delay based on index
+  const animationDelay = index * 0.2;
+
   return (
-    <div className="max-w-6xl mx-auto px-4 py-16 text-center">
-      <motion.h1 
-        className="text-4xl md:text-5xl font-bold mb-8"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        Why Choose Grid Sphere?
-      </motion.h1>
-      
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.3, duration: 0.8 }}
-        className="bg-green-50 rounded-2xl p-6 md:p-8 border border-green-100"
-      >
+    <motion.div
+      ref={cardRef}
+      className="cursor-pointer rounded-2xl overflow-hidden h-full bg-white border border-gray-100 shadow-md"
+      onClick={onClick}
+      initial={{ opacity: 0, y: 50 }}
+      animate={isInView ? { 
+        opacity: 1, 
+        y: 0,
+        transition: {
+          delay: animationDelay,
+          duration: 0.7, 
+          type: "spring", 
+          stiffness: 100
+        }
+      } : {}}
+      whileHover={{
+        y: -10,
+        rotate: "1deg",
+        boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)",
+        background: "linear-gradient(145deg, #ffffff, #f0fdf4)"
+      }}
+      transition={{ type: "spring", stiffness: 300 }}
+    >
+      <div className="p-6">
         <div className="flex items-start mb-4">
-          <span className="text-3xl mr-3">🔬</span>
-          <h2 className="text-2xl md:text-3xl font-semibold text-left">
-            Bridging Technology and Agricultural Research
-          </h2>
+          <motion.div 
+            className="bg-green-100 flex items-center justify-center w-16 h-16 rounded-full"
+            initial={{ scale: 0, rotate: -180 }}
+            animate={isInView ? { 
+              scale: 1, 
+              rotate: 0,
+              transition: { 
+                delay: animationDelay + 0.3,
+                type: "spring",
+                stiffness: 200
+              }
+            } : {}}
+            whileHover={{ scale: 1.2, rotate: 15 }}
+          >
+            <span className="text-3xl">{product.icon}</span>
+          </motion.div>
+          <div className="flex-1 ml-4">
+            <motion.h3 
+              className="text-xl font-bold text-gray-800"
+              initial={{ opacity: 0, x: -20 }}
+              animate={isInView ? { 
+                opacity: 1, 
+                x: 0,
+                transition: { delay: animationDelay + 0.4 }
+              } : {}}
+            >
+              {product.title}
+            </motion.h3>
+            <motion.p 
+              className="text-gray-600 mt-1"
+              initial={{ opacity: 0 }}
+              animate={isInView ? { 
+                opacity: 1,
+                transition: { delay: animationDelay + 0.5 }
+              } : {}}
+            >
+              {product.shortDesc}
+            </motion.p>
+          </div>
         </div>
         
         <motion.p 
-          className="text-lg text-gray-700 mb-4 text-left"
+          className="text-gray-700 mt-4 line-clamp-3"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6, duration: 0.8 }}
+          animate={isInView ? { 
+            opacity: 1,
+            transition: { delay: animationDelay + 0.6 }
+          } : {}}
         >
-          Grid Sphere's systems are not just made for farms — they're built for experimentation, validation, and education. 
-          Our solutions are actively being used in agricultural research, pilot projects, and institutional studies across India.
+          {product.longDesc}
         </motion.p>
-        
-        <motion.p 
-          className="text-lg text-gray-700 text-left"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.9, duration: 0.8 }}
-        >
-          We empower scientists, professors, and students with tools that deliver accurate data, real-time monitoring, 
-          and AI-backed insights — transforming traditional research into smart research.
-        </motion.p>
+      </div>
+      
+      <motion.div 
+        className="px-6 pb-4 text-right"
+        initial={{ opacity: 0, y: 20 }}
+        animate={isInView ? { 
+          opacity: 1, 
+          y: 0,
+          transition: { delay: animationDelay + 0.7 }
+        } : {}}
+      >
+        <span className="text-green-600 font-medium text-sm flex items-center justify-end">
+          View Details
+          <motion.svg 
+            className="w-4 h-4 ml-1" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24" 
+            xmlns="http://www.w3.org/2000/svg"
+            initial={{ x: 0 }}
+            whileHover={{ x: 5 }}
+            transition={{ type: "spring", stiffness: 400 }}
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+          </motion.svg>
+        </span>
       </motion.div>
-    </div>
+    </motion.div>
   );
 };
 
+const ProductOverlay = ({ product, onClose }) => {
+  // Close on escape key press
+  useEffect(() => {
+    const handleEsc = (event) => {
+      if (event.keyCode === 27) onClose();
+    };
+    window.addEventListener('keydown', handleEsc);
+    
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+    };
+  }, [onClose]);
 
-// Use Case Components
-const UseCaseOne = () => {
   return (
-    <div className="p-4">
-      <div className="flex items-center mb-3">
-        <span className="text-2xl mr-2">🔬</span>
-        <p className="font-bold md:text-2xl text-xl ">
-          Soil Health Monitoring
-        </p>
-      </div>
-      <div className="space-y-2">
-        <p className="font-medium ">Agricultural University Research Plot</p>
-        <p className="font-normal text-sm ">
-          <span className="font-semibold">Objective:</span> Study fertilizer effects on nutrient retention and crop yield
-        </p>
-        <p className="font-normal text-sm ">
-          <span className="font-semibold">Tools:</span> Portable Soil Health Monitor (NPK + Moisture)
-        </p>
-        <p className="font-normal text-sm ">
-          <span className="font-semibold">Outcome:</span> Optimized fertilizer timing/dosage through high-frequency soil testing
-        </p>
-      </div>
-    </div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[9999] flex items-center justify-center bg-black bg-opacity-80 p-4 overflow-y-auto"
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0, y: 50 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.9, opacity: 0, y: 50 }}
+        transition={{ type: "spring", damping: 25 }}
+        className="bg-[#F5F5F7] dark:bg-neutral-800 rounded-3xl w-full max-w-5xl max-h-[90vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
+      >
+        <div className="sticky top-0 z-10 flex justify-end p-4 bg-[#F5F5F7] dark:bg-neutral-800">
+          <motion.button
+            onClick={onClose}
+            className="bg-gray-200 dark:bg-neutral-700 p-2 rounded-full hover:bg-gray-300 dark:hover:bg-neutral-600 transition-colors"
+            whileHover={{ scale: 1.1, rotate: 90 }}
+            transition={{ type: "spring", stiffness: 400 }}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-700 dark:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </motion.button>
+        </div>
+        
+        <div className="p-8 md:p-14 rounded-3xl mb-4">
+          {/* Keep the title centered */}
+          <motion.div 
+            className="text-center mb-8"
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
+            <h2 className="text-2xl md:text-4xl font-bold text-neutral-800 dark:text-neutral-200 mb-2">
+              {product.title}
+            </h2>
+            <p className="text-lg md:text-xl text-neutral-600 dark:text-neutral-400">
+              {product.shortDesc}
+            </p>
+          </motion.div>
+          
+          {/* Left-aligned image with 16:9 aspect ratio */}
+          <motion.div 
+            className="aspect-w-16 aspect-h-9 mb-10 overflow-hidden rounded-xl"
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+          >
+            <img
+              src={product.image}
+              alt={`${product.title} preview`}
+              className="w-full h-full object-cover product-image"
+            />
+          </motion.div>
+          
+          {/* Left-aligned product detail text */}
+          <motion.p 
+            className="text-neutral-600 dark:text-neutral-400 text-base md:text-2xl font-sans mb-10"
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+          >
+            {product.detailText}
+          </motion.p>
+          
+          {/* Left-aligned features box */}
+          <motion.div 
+            className="bg-white dark:bg-neutral-700 p-6 rounded-xl mb-8"
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+          >
+            <h3 className="text-xl font-bold text-neutral-800 dark:text-neutral-200 mb-4">
+              Key Features
+            </h3>
+            <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {product.features.map((feature, idx) => (
+                <motion.li 
+                  key={idx} 
+                  className="flex items-start"
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.6 + (idx * 0.1) }}
+                >
+                  <span className="text-green-500 mr-3 text-xl">✓</span>
+                  <span className="text-neutral-700 dark:text-neutral-300">{feature}</span>
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
+        </div>
+      </motion.div>
+    </motion.div>
   );
 };
 
-const UseCaseTwo = () => {
+const BenefitsSection = () => {
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+
+  const benefitItems = [
+    "Accurate data for soil, air, and climate conditions",
+    "Real-time monitoring during trials",
+    "Custom API/data export for academic analysis",
+    "Plug-and-play setup for student projects",
+    "Easy integration with research dashboards"
+  ];
+
   return (
-    <div className="p-4">
-      <div className="flex items-center mb-3">
-        <span className="text-2xl mr-2">🌦️</span>
-        <p className="font-bold md:text-2xl text-xl">
-          Microclimate Monitoring
-        </p>
+    <section className="bg-neutral-50 py-16 md:py-32  border-neutral-200">
+      <div className="max-w-6xl mx-auto px-4" ref={sectionRef}>
+        <motion.div 
+          className="bg-white rounded-2xl p-10 shadow-xl border border-neutral-100 relative overflow-hidden"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+        >
+          {/* Decorative elements */}
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-green-600"></div>
+          <motion.div 
+            className="absolute -right-16 -bottom-16 w-64 h-64 bg-green-50 rounded-full opacity-20"
+            animate={isInView ? {
+              scale: [1, 1.2, 1],
+              transition: { 
+                repeat: Infinity, 
+                duration: 8,
+                ease: "easeInOut"
+              }
+            } : {}}
+          ></motion.div>
+          
+          <div className="flex items-start mb-10 relative z-10">
+            <motion.div 
+              className="bg-neutral-50 p-3 rounded-xl shadow-inner mr-5"
+              initial={{ rotate: -90, opacity: 0 }}
+              animate={isInView ? { rotate: 0, opacity: 1 } : {}}
+              transition={{ delay: 0.3, duration: 0.5 }}
+            >
+              <span className="text-3xl text-green-600">🔬</span>
+            </motion.div>
+            <div>
+              <motion.h2 
+                className="text-2xl md:text-4xl font-bold text-neutral-800"
+                initial={{ opacity: 0, x: 30 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ delay: 0.4, duration: 0.6 }}
+              >
+                Bridging Technology and Agricultural Research
+              </motion.h2>
+              <motion.div 
+                className="w-24 h-1 bg-gradient-to-r from-green-500 to-green-400 mt-3 rounded-full"
+                initial={{ width: 0 }}
+                animate={isInView ? { width: 96 } : {}}
+                transition={{ delay: 0.6, duration: 0.8 }}
+              ></motion.div>
+            </div>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.7, duration: 0.6 }}
+            >
+              <p className="text-neutral-700 text-lg leading-relaxed mb-6">
+                Grid Sphere's systems are not just made for farms — they're built for experimentation, validation, and education. Our solutions are actively being used in agricultural research, pilot projects, and institutional studies across India.
+              </p>
+              <p className="text-neutral-700 text-lg leading-relaxed">
+                We empower scientists, professors, and students with tools that deliver accurate data, real-time monitoring, and AI-backed insights — transforming traditional research into smart research.
+              </p>
+            </motion.div>
+            
+            <motion.div 
+              className="bg-neutral-50 rounded-xl p-8 border border-neutral-100 shadow-lg"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.8, duration: 0.6 }}
+            >
+              <h3 className="font-bold text-xl text-neutral-800 mb-6 border-b border-neutral-200 pb-3">
+                Key Benefits for Research
+              </h3>
+              <ul className="space-y-4">
+                {benefitItems.map((item, idx) => (
+                  <motion.li 
+                    key={idx} 
+                    className="flex items-start"
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={isInView ? { opacity: 1, x: 0 } : {}}
+                    transition={{ delay: 0.9 + (idx * 0.1), duration: 0.5 }}
+                  >
+                    <span className="flex-shrink-0 h-6 w-6 flex items-center justify-center bg-green-100 rounded-full text-green-600 mr-3">✓</span>
+                    <span className="text-neutral-700 text-lg">{item}</span>
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
-      <div className="space-y-2">
-        <p className="font-medium ">Semi-urban Greenhouse</p>
-        <p className="font-normal text-sm">
-          <span className="font-semibold">Objective:</span> Study crop behavior in controlled vs natural environments
-        </p>
-        <p className="font-normal text-sm ">
-          <span className="font-semibold">Tools:</span> Smart Farm Monitoring Station
-        </p>
-        <p className="font-normal text-sm ">
-          <span className="font-semibold">Outcome:</span> Optimized greenhouse ventilation and watering strategies
-        </p>
-      </div>
-    </div>
+    </section>
   );
 };
 
-const UseCaseThree = () => {
+const UseCasesSection = () => {
+  const sectionRef = useRef(null);
+  
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Add staggered animations for use cases
+      const useCases = gsap.utils.toArray('.use-case-item');
+      useCases.forEach((useCase, index) => {
+        gsap.fromTo(useCase, 
+          { 
+            opacity: 0, 
+            y: 50,
+            scale: 0.95
+          },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: useCase,
+              start: "top 85%",
+              toggleActions: "play none none reverse"
+            },
+            delay: index * 0.15
+          }
+        );
+      });
+    }, sectionRef);
+    
+    return () => ctx.revert();
+  }, []);
+
+  const useCases = [
+    {
+      id: 1,
+      icon: "🧪",
+      title: "Soil Health Monitoring",
+      subtitle: "Agricultural University Research Plot",
+      description: "Study fertilizer effects on nutrient retention and crop yield",
+      outcome: "Optimized fertilizer timing/dosage through high-frequency soil testing"
+    },
+    {
+      id: 2,
+      icon: "🌦️",
+      title: "Microclimate Monitoring",
+      subtitle: "Semi-urban Greenhouse",
+      description: "Study crop behavior in controlled vs natural environments",
+      outcome: "Optimized greenhouse ventilation and watering strategies"
+    },
+    {
+      id: 3,
+      icon: "💧",
+      title: "Smart Irrigation Trials",
+      subtitle: "Rajasthan Field Demonstration Farm",
+      description: "Reduce water usage in drought-prone areas",
+      outcome: "35% water reduction without compromising crop yield"
+    },
+    {
+      id: 4,
+      icon: "🎓",
+      title: "Student Agritech Projects",
+      subtitle: "B.Tech Final Year Projects",
+      description: "Prototype real-world IoT/AI agriculture applications",
+      outcome: "Hands-on learning with real deployments and publications"
+    }
+  ];
+
   return (
-    <div className="p-4">
-      <div className="flex items-center mb-3">
-        <span className="text-2xl mr-2">💧</span>
-        <p className="font-bold md:text-2xl text-xl">
-          Smart Irrigation Trials
-        </p>
+    <section ref={sectionRef} className="max-w-6xl px-4 py-16 mx-auto">
+      <div className="relative mb-12 text-center">
+        <motion.h2
+          className="text-4xl md:text-5xl font-bold text-black mb-6"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          Proven Use Cases
+        </motion.h2>
       </div>
-      <div className="space-y-2">
-        <p className="font-medium ">Rajasthan Field Demonstration Farm</p>
-        <p className="font-normal text-sm ">
-          <span className="font-semibold">Objective:</span> Reduce water usage in drought-prone areas
-        </p>
-        <p className="font-normal text-sm ">
-          <span className="font-semibold">Tools:</span> Smart Irrigation System + Soil Moisture Probes
-        </p>
-        <p className="font-normal text-sm ">
-          <span className="font-semibold">Outcome:</span> 35% water reduction without compromising crop yield
-        </p>
+      
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        {useCases.map((useCase, index) => (
+          <div 
+            key={useCase.id} 
+            className={`use-case-item bg-gradient-to-br from-green-100 to-green-50 p-6 rounded-xl shadow-md border border-gray-200 cursor-pointer`}
+          >
+            <div className="flex items-start mb-4">
+              <motion.div 
+                whileHover={{ rotate: 360 }}
+                transition={{ duration: 0.8 }}
+                className="flex items-center justify-center w-10 h-10 mb-4 bg-white rounded-full shadow-inner mr-4"
+              >
+                <span className="text-lg">{index + 1}</span>
+              </motion.div>
+              <div>
+                <h3 className="mb-2 text-xl font-bold text-gray-800">{useCase.title}</h3>
+                <p className="text-gray-700 font-medium">{useCase.subtitle}</p>
+              </div>
+            </div>
+            
+            <div className="space-y-3 pl-14">
+              <p className="text-gray-700">
+                <span className="font-semibold">Objective:</span> {useCase.description}
+              </p>
+              <p className="text-gray-700">
+                <span className="font-semibold">Outcome:</span> {useCase.outcome}
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
-    </div>
+    </section>
   );
 };
 
-const UseCaseFour = () => {
-  return (
-    <div className="p-4">
-      <div className="flex items-center mb-3">
-        <span className="text-2xl mr-2">🎓</span>
-        <p className="font-bold md:text-2xl text-xl">
-          Student Agritech Projects
-        </p>
-      </div>
-      <div className="space-y-2">
-        <p className="font-medium text-gray-700">B.Tech Final Year Projects</p>
-        <p className="font-normal text-sm">
-          <span className="font-semibold">Objective:</span> Prototype real-world IoT/AI agriculture applications
-        </p>
-        <p className="font-normal text-sm ">
-          <span className="font-semibold">Tools:</span> Full monitoring suite + Cloud Dashboard
-        </p>
-        <p className="font-normal text-sm">
-          <span className="font-semibold">Outcome:</span> Hands-on learning with real deployments and publications
-        </p>
-      </div>
-    </div>
-  );
-};
-
-const cards = [
-  {
-    id: 1,
-    content: <UseCaseOne />,
-    className: "md:col-span-2",
-    thumbnail: soilHealth
-  },
-  {
-    id: 2,
-    content: <UseCaseTwo />,
-    className: "col-span-1",
-    thumbnail: climate
-  },
-  {
-    id: 3,
-    content: <UseCaseThree />,
-    className: "col-span-1",
-    thumbnail: drip
-  },
-  {
-    id: 4,
-    content: <UseCaseFour />,
-    className: "md:col-span-2",
-    thumbnail: student
-  },
-];
-
-export const Products = () => {
-  return (
-    <>
-      <ProductsSection />
-      <AnimatedHeading />
-      <div className="h-screen  w-full">
-        <LayoutGrid cards={cards} />
-      </div>
-      <AppleCardsCarouselDemo />
-    </>
-  );
-};
+export default Products;

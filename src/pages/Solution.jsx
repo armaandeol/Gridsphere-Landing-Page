@@ -2,6 +2,8 @@ import { Header } from '../sections/Header';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useEffect } from 'react';
+import  TestimonialSection  from '../components/TestimonialSection';
+import { Footer } from '../sections/Footer';
 
 export const Solution = () => {
   const [ref, inView] = useInView({ threshold: 0.1 });
@@ -216,24 +218,24 @@ export const Solution = () => {
             >
               {[
                 {
-                  title: "Smart Monitoring",
-                  desc: "IoT sensors for real-time farm data",
-                  icon: "📊"
+                  title: "Precision Soil Monitoring",
+                  desc: "Track soil health instantly",
+                  icon: "🌱"
                 },
                 {
-                  title: "AI Predictions",
-                  desc: "Soil nutrition and weather forecasting",
-                  icon: "🤖"
-                },
-                {
-                  title: "Automation",
-                  desc: "Customizable irrigation systems",
+                  title: "Farm Automation & Alerts",
+                  desc: "Smart alerts & tools",
                   icon: "⚙️"
                 },
                 {
-                  title: "Dashboard",
-                  desc: "Live insights on your mobile",
-                  icon: "📱"
+                  title: "Real-Time Environmental Sensing",
+                  desc: "Monitor climate live",
+                  icon: "🌦️"
+                },
+                {
+                  title: "Data Dashboards for Decision-Making",
+                  desc: "Insights at a glance",
+                  icon: "📈"
                 }
               ].map((item, index) => (
                 <motion.div
@@ -295,34 +297,34 @@ export const Solution = () => {
           >
             {[
               {
-                title: "Designed for India",
-                desc: "Tailored to local conditions",
-                color: "from-green-100 to-green-50"
-              },
-              {
-                title: "Affordable",
-                desc: "Accessible to all farmers",
+                title: "Fast & Scalable Deployment",
+                desc: "Quick setup, grows with you",
                 color: "from-blue-100 to-blue-50"
               },
               {
-                title: "Real-time Data",
-                desc: "Instant farm insights",
+                title: "Seamless Integration with Existing Systems",
+                desc: "Works with your tools",
                 color: "from-purple-100 to-purple-50"
               },
               {
-                title: "AI Powered",
-                desc: "Smart predictions",
+                title: "Mobile-Friendly Platforms",
+                desc: "Access anywhere, anytime",
                 color: "from-yellow-100 to-yellow-50"
               },
               {
-                title: "Easy to Use",
-                desc: "Simple interface",
+                title: "Customization for Every Farm Size",
+                desc: "Tailored to your needs",
                 color: "from-red-100 to-red-50"
               },
               {
-                title: "24/7 Support",
-                desc: "Always available",
+                title: "Secure, Real-Time Data Processing",
+                desc: "Safe, instant insights",
                 color: "from-indigo-100 to-indigo-50"
+              },
+              {
+                title: "Precision Soil Monitoring",
+                desc: "Track soil health instantly",
+                color: "from-green-100 to-green-50"
               }
             ].map((item, index) => (
               <motion.div
@@ -365,160 +367,13 @@ export const Solution = () => {
           </motion.div>
         </section>
 
-      
-        <section className="py-20 text-white bg-green-600">
-          <div className="max-w-3xl px-4 mx-auto text-center">
-            <motion.h2 
-              className="mb-12 text-3xl font-bold"
-              whileInView={{ 
-                scale: [1, 1.1, 1],
-                transition: { duration: 0.5 } 
-              }}
-              viewport={{ once: true }}
-            >
-              What Farmers Say
-            </motion.h2>
-            
-            <motion.div
-              whileHover={{
-                rotateY: 180,
-                transition: { duration: 0.6 }
-              }}
-              className="w-full perspective-1000"
-            >
-              <motion.div
-                whileHover={{ rotateY: 180 }}
-                className="relative flex items-center justify-center w-full h-64 p-8 bg-white bg-opacity-10 rounded-xl backdrop-blur-sm preserve-3d"
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <motion.div 
-                  className="absolute w-full backface-hidden"
-                  style={{ backfaceVisibility: "hidden" }}
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ delay: 0.2 }}
-                >
-                  <motion.blockquote 
-                    className="mb-6 text-xl italic"
-                    animate={{
-                      opacity: [0.8, 1, 0.8],
-                      transition: { duration: 3, repeat: Infinity }
-                    }}
-                  >
-                    
-                  </motion.blockquote>
-                  <motion.p 
-                    className="font-medium"
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    
-                  </motion.p>
-                </motion.div>
-                <motion.div 
-                  className="absolute w-full backface-hidden rotate-y-180"
-                  style={{ 
-                    backfaceVisibility: "hidden",
-                    transform: "rotateY(180deg)"
-                  }}
-                >
-                  <motion.p 
-                    className="mb-4 text-lg"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.4 }}
-                  >
-                    ★★★★★
-                  </motion.p>
-                  <motion.p
-                    animate={floatingAnimation}
-                  >
-                    Verified Customer
-                  </motion.p>
-                  <motion.p 
-                    className="mt-2 text-sm"
-                    animate={floatingAnimation}
-                    transition={{ delay: 0.2 }}
-                  >
-                    Since 2022
-                  </motion.p>
-                </motion.div>
-              </motion.div>
-            </motion.div>
-          </div>
-        </section>
+        
+        <TestimonialSection />
 
        
-        <section className="px-4 py-20 text-white bg-gray-900">
-          <div className="max-w-2xl mx-auto text-center">
-            <motion.h2 
-              className="mb-6 text-3xl font-bold md:text-4xl"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-            >
-              Ready to Upgrade Your Farm?
-            </motion.h2>
-            
-            <motion.div
-              whileHover={{
-                scale: 1.05,
-                transition: { type: "spring", stiffness: 400 }
-              }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-block"
-              animate={pulseAnimation}
-            >
-              <motion.button
-                whileHover={{
-                  background: "linear-gradient(45deg, #10b981, #3b82f6)",
-                  boxShadow: "0 0 20px rgba(74, 222, 128, 0.7)"
-                }}
-                whileTap={{ 
-                  scale: 0.95,
-                  boxShadow: "0 0 10px rgba(74, 222, 128, 0.5)"
-                }}
-                className="relative px-10 py-4 overflow-hidden text-lg font-bold text-white bg-green-600 rounded-full shadow-lg"
-              >
-                <span className="relative z-10">Get Started Today</span>
-                <motion.span
-                  className="absolute inset-0 opacity-0 bg-gradient-to-r from-green-500 to-blue-500"
-                  whileHover={{ opacity: 1 }}
-                />
-               
-                <motion.span
-                  className="absolute top-0 left-0 w-full h-full bg-white rounded-full opacity-0"
-                  whileTap={{
-                    scale: 2,
-                    opacity: 0.2,
-                    transition: { duration: 0.5 }
-                  }}
-                />
-              </motion.button>
-            </motion.div>
-            
-            
-            <motion.div 
-              className="absolute bottom-0 left-0 w-40 h-40 bg-green-400 rounded-full opacity-10"
-              animate={{
-                ...floatingAnimation,
-                x: [0, 50, 0],
-                transition: { duration: 6 }
-              }}
-              style={{ y: '-20%' }}
-            />
-            <motion.div 
-              className="absolute bottom-0 right-0 w-24 h-24 bg-blue-400 rounded-full opacity-10"
-              animate={{
-                ...floatingAnimation,
-                x: [0, -30, 0],
-                transition: { duration: 5, delay: 0.5 }
-              }}
-              style={{ y: '-10%' }}
-            />
-          </div>
-        </section>
+        
       </div>
+      <Footer />
     </>
   );
 };

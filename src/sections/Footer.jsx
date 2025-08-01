@@ -21,11 +21,9 @@ export const Footer = () => {
                 </Link>
                 <nav className='flex flex-col gap-6 mt-6 md:flex-row md:justify-center'>
                     <Link to="/about" className="transition-colors hover:text-white">About</Link>
-                    <Link to="/features" className="transition-colors hover:text-white">Features</Link>
-                    <a href="#" className="transition-colors hover:text-white">Customers</a>
-                    <a href="#" className="transition-colors hover:text-white">Pricing</a>
-                    <a href="#" className="transition-colors hover:text-white">Help</a>
-                    <a href="#" className="transition-colors hover:text-white">Careers</a>
+                    <Link to="/products" className="transition-colors hover:text-white">Products</Link>
+                    <Link to="/solutions" className="transition-colors hover:text-white">Solutions</Link>
+                    <Link to="/contact" className="transition-colors hover:text-white">Contact</Link>
                 </nav>
                 <div className='flex justify-center gap-6 mt-6'>
                     <a href="https://www.facebook.com/profile.php?id=61577994149104"><img src={facebook} alt="Facebook" className='w-6 h-6' /></a>

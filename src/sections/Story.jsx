@@ -203,37 +203,13 @@ export const Story = () => {
                                 onMouseEnter={() => setIsHovered(true)}
                                 onMouseLeave={() => setIsHovered(false)}
                             >
-                                <video 
-                                    ref={videoRef}
-                                    src="/src/assets/Ducks.webm" 
-                                    autoPlay
-                                    loop
-                                    muted
+                                <img 
+                                    src="/src/assets/images/sow.webp" 
+                                    alt="Ducks in a pond"
                                     className="story-image w-full h-full object-cover"
                                     style={{ maxWidth: '500px', height: '400px' }}
-                                >
-                                    Your browser does not support the video tag.
-                                </video>
+                                />
                                 
-                                {/* Custom Play/Pause Button */}
-                                <div 
-                                    className={`absolute inset-0 flex items-center justify-center cursor-pointer transition-opacity duration-300 ${
-                                        isHovered ? 'opacity-100' : 'opacity-0'
-                                    }`}
-                                    onClick={toggleVideo}
-                                >
-                                    <div className="bg-black bg-opacity-50 rounded-full p-4 hover:bg-opacity-70 transition-all duration-200">
-                                        {isPlaying ? (
-                                            <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
-                                            </svg>
-                                        ) : (
-                                            <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-                                                <path d="M8 5v14l11-7z"/>
-                                            </svg>
-                                        )}
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -246,13 +222,13 @@ export const Story = () => {
                     {/* Factory Section */}
                     <div className="tech-comparison-item flex flex-col md:flex-row items-center mb-24 gap-8">
                         <div className="tech-image-container w-full md:w-1/2">
-                            <div className="rounded-lg overflow-hidden shadow-xl">
+                            <div className="rounded-lg overflow-hidden shadow-xl h-full" style={{ maxHeight: '350px' }}>
                                 <video 
                                     src="/src/assets/Factories.webm" 
                                     autoPlay
                                     loop
                                     muted
-                                    className="tech-image w-full h-64 object-cover"
+                                    className="tech-image w-full h-full object-cover"
                                 />
                             </div>
                         </div>
@@ -269,13 +245,13 @@ export const Story = () => {
                     {/* Homes Section */}
                     <div className="tech-comparison-item flex flex-col md:flex-row items-center mb-24 gap-8">
                         <div className="tech-image-container w-full md:w-1/2">
-                            <div className="rounded-lg overflow-hidden shadow-xl">
+                            <div className="rounded-lg overflow-hidden shadow-xl h-full" style={{ maxHeight: '350px' }}>
                                 <video 
                                     src="/src/assets/Homes.webm" 
                                     autoPlay
                                     loop
                                     muted
-                                    className="tech-image w-full h-64 object-cover"
+                                    className="tech-image w-full h-full object-cover"
                                 />
                             </div>
                         </div>
@@ -292,13 +268,13 @@ export const Story = () => {
                     {/* Cars Section */}
                     <div className="tech-comparison-item flex flex-col md:flex-row items-center mb-24 gap-8">
                         <div className="tech-image-container w-full md:w-1/2">
-                            <div className="rounded-lg overflow-hidden shadow-xl">
+                            <div className="rounded-lg overflow-hidden shadow-xl h-full" style={{ maxHeight: '350px' }}>
                                 <video 
                                     src="/src/assets/Cars.webm" 
                                     autoPlay
                                     loop
                                     muted
-                                    className="tech-image w-full h-64 object-cover"
+                                    className="tech-image w-full h-full object-cover"
                                 />
                             </div>
                         </div>
@@ -324,11 +300,9 @@ export const Story = () => {
                 <div className="story-section mb-20">
                     <div className="grid md:grid-cols-2 gap-12 items-center">
                         <div className="relative">
-                            <video 
-                                src="/src/assets/Sheeps.webm" 
-                                autoPlay
-                                loop
-                                muted
+                            <img 
+                                src="/src/assets/images/team_meeting.png" 
+                                alt="team_meeting"
                                 className="story-image rounded-lg shadow-2xl w-full"
                             />
                         </div>
@@ -349,8 +323,8 @@ export const Story = () => {
                         <h3 className="text-3xl font-bold mb-10 text-gray-800">The Journey Begins</h3>
                         <div className="max-w-4xl mx-auto">
                             <img 
-                                src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&h=400&fit=crop" 
-                                alt="College students working on project" 
+                                src="/src/assets/images/journey.jpg" 
+                                alt="journey" 
                                 className="story-image rounded-lg shadow-2xl w-full mb-8"
                             />
                             <p className="text-xl text-gray-700 mb-6">
@@ -374,8 +348,8 @@ export const Story = () => {
                         <div className="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
                             <div className="relative">
                                 <img 
-                                    src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=500&h=400&fit=crop" 
-                                    alt="Grid Sphere technology" 
+                                    src="/src/assets/images/grid_team.jpg" 
+                                    alt="Grid Sphere Team" 
                                     className="story-image rounded-lg shadow-2xl w-full"
                                 />
                             </div>
