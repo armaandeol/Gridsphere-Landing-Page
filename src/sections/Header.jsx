@@ -9,7 +9,7 @@ export const Header = () => {
                 <div className="Container">
                     <div className="flex items-center justify-between">
                         <NavLink to="/">
-                            {/* Replace with your imported image */}
+                            
                             <img 
                                 src={logoImage} 
                                 alt="Logo" 
