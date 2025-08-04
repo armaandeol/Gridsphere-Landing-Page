@@ -79,7 +79,7 @@ export const Vision = () => {
             {/* Graphic Column */}
             <motion.div 
               variants={graphicItem}
-              className="w-full flex justify-start items-center lg:justify-center lg:w-1/2 lg:pl-4 lg:px-12 px-0"
+              className="w-full flex justify-center items-center lg:w-1/2 lg:pl-4 lg:px-12 px-4"
             >
               <Pointssection />
             </motion.div>
