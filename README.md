@@ -1,12 +1,82 @@
-# React + Vite
+# Gridsphere Landing Page
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Gridsphere is a startup focused on **Smart Farming Solutions**, transforming agriculture with real-time sensing and AI.  
+This project is a modern, responsive landing page for Gridsphere, built with React and Vite.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Responsive Design:** Works seamlessly on desktop and mobile devices.
+- **Sticky Header:** Navigation bar stays visible at the top.
+- **Mobile Dropdown Menu:** Hamburger menu for easy navigation on phones.
+- **Modern UI:** Clean, professional look using Tailwind CSS.
+- **React Router:** Fast, client-side navigation.
+- **Easy Customization:** Modular code structure.
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (v16+)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/gridsphere-landing-page.git
+   cd gridsphere-landing-page
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. **Start the development server:**
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+4. Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+## Project Structure
+
+```
+src/
+  assets/         # Images and SVGs
+  logos/          # Logo and menu icon components
+  sections/       # Page sections (Header, Footer, etc.)
+  App.jsx         # Main app component
+  main.jsx        # Entry point
+```
+
+## Customization
+
+- **Navigation:** Edit `src/sections/Header.jsx` to update navigation links.
+- **Branding:** Replace the logo in `src/assets/`.
+- **Content:** Update text and sections in `src/sections/` as needed.
+
+## Deployment
+
+To build for production:
+
+```bash
+npm run build
+# or
+yarn build
+```
+
+The output will be in the `dist/` folder.
+
+## About Gridsphere
+
+Gridsphere aims to revolutionize agriculture by providing smart, AI-powered solutions for real-time monitoring and decision-making.  
+Our platform helps farmers optimize resources, increase yield, and reduce manual effort through advanced sensing and analytics.
+
+---
+
+Made with ❤️ using React +vite.
