@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import Menu from "../logos/menu";
-import logoImage from "../assets/sketch1727512163153(3).png";
 
 export const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -13,7 +12,7 @@ export const Header = () => {
                     <div className="flex items-center justify-between">
                         <NavLink to="/">
                             <img 
-                                src={logoImage} 
+                                src="/assets/sketch1727512163153(3).png" 
                                 alt="Logo" 
                                 className="w-auto h-12 rounded-lg " 
                             />

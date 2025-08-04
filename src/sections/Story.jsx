@@ -204,7 +204,7 @@ export const Story = () => {
                                 onMouseLeave={() => setIsHovered(false)}
                             >
                                 <img 
-                                    src="/src/assets/images/sow.webp" 
+                                    src="/assets/images/sow.webp" 
                                     alt="Ducks in a pond"
                                     className="story-image w-full h-full object-cover"
                                     style={{ maxWidth: '500px', height: '400px' }}
@@ -224,7 +224,7 @@ export const Story = () => {
                         <div className="tech-image-container w-full md:w-1/2">
                             <div className="rounded-lg overflow-hidden shadow-xl h-full" style={{ maxHeight: '350px' }}>
                                 <video 
-                                    src="/src/assets/Factories.webm" 
+                                    src="/assets/Factories.webm" 
                                     autoPlay
                                     loop
                                     muted
@@ -247,7 +247,7 @@ export const Story = () => {
                         <div className="tech-image-container w-full md:w-1/2">
                             <div className="rounded-lg overflow-hidden shadow-xl h-full" style={{ maxHeight: '350px' }}>
                                 <video 
-                                    src="/src/assets/Homes.webm" 
+                                    src="/assets/Homes.webm" 
                                     autoPlay
                                     loop
                                     muted
@@ -270,7 +270,7 @@ export const Story = () => {
                         <div className="tech-image-container w-full md:w-1/2">
                             <div className="rounded-lg overflow-hidden shadow-xl h-full" style={{ maxHeight: '350px' }}>
                                 <video 
-                                    src="/src/assets/Cars.webm" 
+                                    src="/assets/Cars.webm" 
                                     autoPlay
                                     loop
                                     muted
@@ -301,7 +301,7 @@ export const Story = () => {
                     <div className="grid md:grid-cols-2 gap-12 items-center">
                         <div className="relative">
                             <img 
-                                src="/src/assets/images/team_meeting.png" 
+                                src="/assets/images/team_meeting.png" 
                                 alt="team_meeting"
                                 className="story-image rounded-lg shadow-2xl w-full"
                             />
@@ -323,7 +323,7 @@ export const Story = () => {
                         <h3 className="text-3xl font-bold mb-10 text-gray-800">The Journey Begins</h3>
                         <div className="max-w-4xl mx-auto">
                             <img 
-                                src="/src/assets/images/journey.jpg" 
+                                src="/assets/images/journey.jpg" 
                                 alt="journey" 
                                 className="story-image rounded-lg shadow-2xl w-full mb-8"
                             />
@@ -348,7 +348,7 @@ export const Story = () => {
                         <div className="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
                             <div className="relative">
                                 <img 
-                                    src="/src/assets/images/grid_team.jpg" 
+                                    src="/assets/images/grid_team.jpg" 
                                     alt="Grid Sphere Team" 
                                     className="story-image rounded-lg shadow-2xl w-full"
                                 />

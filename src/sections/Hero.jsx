@@ -1,7 +1,6 @@
 import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
-import fieldsVideo from '../assets/fields.webm';
 import { Link } from 'react-router-dom';
 
 // Register GSAP plugins
@@ -79,7 +78,7 @@ export const Hero = () => {
         loop
         playsInline
         preload="metadata"
-        src={fieldsVideo}
+        src="/assets/fields.webm"
       >
         Your browser does not support the video tag.
       </video>

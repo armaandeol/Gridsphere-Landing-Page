@@ -1,27 +1,24 @@
 import CardSwap, { Card } from '../components/CardSwap';
-import innovativeSolutions from '../assets/images/innovative_solutions.jpg';
-import userCentricDesign from '../assets/images/user_centric_design.jpg';
-import sustainability from '../assets/images/sustainability.webp';
 
 const Points = [
   {
     id: "0",
     title: "Innovative Solutions",
     text: "We strive to develop cutting-edge technologies that address real-world challenges, enhancing the quality of life for individuals and communities.",
-    imageUrl: innovativeSolutions,
+    imageUrl: "/assets/images/innovative_solutions.jpg",
     light: true,
   },
   {
     id: "1",
     title: "User-Centric Design",
     text: "Our products are designed with the user in mind, ensuring that technology is accessible, intuitive, and enhances everyday experiences.",
-    imageUrl: userCentricDesign,
+    imageUrl: "/assets/images/user_centric_design.jpg",
   },
   {
     id: "2",
     title: "Sustainability",
     text: "We are committed to sustainable and responsible practices, ensuring that our innovations contribute positively to both the environment and society.",
-    imageUrl: sustainability,
+    imageUrl: "/assets/images/sustainability.webp",
     light: true,
   },
 ];
